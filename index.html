@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Realmarket — шланги и рукава</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      background:
+        repeating-linear-gradient(
+          45deg,
+          rgba(255, 255, 255, 0.02) 0px,
+          rgba(255, 255, 255, 0.02) 2px,
+          transparent 2px,
+          transparent 8px
+        ),
+        radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 80%, rgba(0,0,0,0.2) 0%, transparent 60%),
+        linear-gradient(145deg,
+        #3a3a3a 0%,
+        #5a5a5a 25%,
+        #8a8a8a 50%,
+        #5a5a5a 75%,
+        #3a3a3a 100%
+        );
+      background-attachment: fixed;
+      color: #222;
+      line-height: 1.6;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      padding-top: 120px;
+    }
+
+    .glow-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.25;
+      animation: floatGlow 12s infinite alternate ease-in-out;
+    }
+
+    .glow-orb:nth-child(1) {
+      width: 600px;
+      height: 600px;
+      background: #999;
+      top: -10%;
+      left: -10%;
+      animation-duration: 18s;
+    }
+
+    .glow-orb:nth-child(2) {
+      width: 500px;
+      height: 500px;
+      background: #888;
+      bottom: -15%;
+      right: -5%;
+      animation-duration: 15s;
+      animation-delay: -4s;
+    }
+
+    .glow-orb:nth-child(3) {
+      width: 450px;
+      height: 450px;
+      background: #aaa;
+      top: 40%;
+      left: 60%;
+      animation-duration: 20s;
+      animation-delay: -8s;
+    }
+
+    @keyframes floatGlow {
+      0% { transform: translate(0, 0) scale(1); opacity: 0.2; }
+      50% { transform: translate(40px, -30px) scale(1.1); opacity: 0.4; }
+      100% { transform: translate(-20px, 20px) scale(0.9); opacity: 0.2; }
+    }
+
+    .sticky-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(135deg, #d4d4d4 0%, #b0b0b0 30%, #e0e0e0 50%, #c0c0c0 70%, #a8a8a8 100%);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2), inset 0 1px 2px rgba(255,255,255,0.4), inset 0 -2px 4px rgba(0,0,0,0.2);
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      z-index: 1000;
+      padding: 10px 0;
+    }
+
+    .sticky-header .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: transparent;
+      box-shadow: none;
+      padding: 10px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .sticky-header .header-left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .sticky-header .logo-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .sticky-header .logo-letter {
+      height: 2.8rem;
+      width: auto;
+      display: block;
+      border-radius: 12px;
+      transition: transform 0.2s ease;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
+    }
+
+    .sticky-header .logo-letter:hover {
+      transform: scale(1.05);
+    }
+
+    .sticky-header .logo-text {
+      font-size: 2.6rem;
+      font-weight: 600;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      color: #000;
+      line-height: 1;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+    }
+
+    .sticky-header .subtitle {
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 4px;
+      color: #555;
+      margin-top: 2px;
+      margin-left: 12px;
+    }
+
+    .sticky-header .header-contacts {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .sticky-header .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      color: #333;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 10px;
+      transition: all 0.2s ease;
+      background: rgba(255,255,255,0.3);
+      backdrop-filter: blur(4px);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      white-space: nowrap;
+    }
+
+    .sticky-header .contact-item:hover {
+      background: rgba(255,255,255,0.5);
+      color: #000;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .sticky-header .contact-icon {
+      font-size: 1rem;
+      opacity: 0.8;
+      filter: grayscale(100%);
+      transition: opacity 0.2s;
+    }
+
+    .sticky-header .contact-item:hover .contact-icon {
+      opacity: 1;
+    }
+
+    .sticky-header .contact-label {
+      font-weight: 500;
+      color: #444;
+      transition: color 0.2s;
+    }
+
+    .sticky-header .contact-item:hover .contact-label {
+      color: #000;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      background: linear-gradient(135deg, #d4d4d4 0%, #b0b0b0 30%, #e0e0e0 50%, #c0c0c0 70%, #a8a8a8 100%);
+      border-radius: 30px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.2), inset 0 1px 2px rgba(255,255,255,0.4), inset 0 -2px 4px rgba(0,0,0,0.2);
+      padding: 30px;
+      transition: box-shadow 0.3s ease;
+      position: relative;
+      z-index: 1;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .container:hover {
+      box-shadow: 0 16px 40px rgba(0,0,0,0.3), inset 0 1px 2px rgba(255,255,255,0.5), inset 0 -2px 4px rgba(0,0,0,0.25);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(25px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .anim-scroll {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .anim-scroll.visible {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .two-photos {
+      display: flex;
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .two-photos img {
+      width: calc(50% - 10px);
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 24px;
+      border: 1px solid rgba(0,0,0,0.1);
+      display: block;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .two-photos img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .carousel-section {
+      margin: 50px 0;
+    }
+
+    .carousel-title {
+      font-size: 1.6rem;
+      font-weight: 400;
+      letter-spacing: 2px;
+      margin-bottom: 25px;
+      text-align: center;
+      color: #000;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+      position: relative;
+    }
+
+    .carousel-title:after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: #666;
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      border-radius: 28px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15), inset 0 1px 2px rgba(255,255,255,0.3);
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(0,0,0,0.15);
+      color: #333;
+      width: 48px;
+      height: 48px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1), inset 0 1px 1px rgba(255,255,255,0.5);
+      z-index: 2;
+    }
+
+    .carousel-btn:hover {
+      background: rgba(255,255,255,0.9);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15), inset 0 1px 1px rgba(255,255,255,0.7);
+      transform: translateY(-50%) scale(1.05);
+      border-color: rgba(0,0,0,0.25);
+    }
+
+    .carousel-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .prev { left: 16px; }
+    .next { right: 16px; }
+
+    .carousel-indicators {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: #aaa;
+      border-radius: 50%;
+      margin: 0 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
+    }
+
+    .dot.active {
+      background: #555;
+      transform: scale(1.3);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+
+    .about {
+      margin: 60px 0;
+      text-align: center;
+    }
+
+    .about h2 {
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+      color: #000;
+      display: inline-block;
+      position: relative;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+    }
+
+    .about h2:after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: #666;
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+
+    .about p {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      color: #333;
+      background: rgba(255,255,255,0.4);
+      backdrop-filter: blur(2px);
+      padding: 24px;
+      border-radius: 24px;
+      border-left: 4px solid #555;
+      line-height: 1.7;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .price-list {
+      margin: 60px 0;
+    }
+
+    .price-list h2 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: 3px;
+      margin-bottom: 30px;
+      color: #000;
+      position: relative;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+    }
+
+    .price-list h2:after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: #666;
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 20px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(4px);
+    }
+
+    th, td {
+      padding: 15px 10px;
+      text-align: left;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    th {
+      font-weight: 600;
+      letter-spacing: 1px;
+      background: rgba(200,200,200,0.6);
+      color: #000;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      box-shadow: inset 0 1px 2px rgba(255,255,255,0.3);
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255,255,255,0.6); }
+
+    .contacts {
+      margin: 60px 0 40px;
+      text-align: center;
+      border-top: 2px solid #777;
+      padding-top: 40px;
+    }
+
+    .contacts h2 {
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: 3px;
+      margin-bottom: 25px;
+      color: #000;
+      display: inline-block;
+      position: relative;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+    }
+
+    .contacts h2:after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: #666;
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+
+    .contacts p {
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      color: #333;
+    }
+
+    .contacts strong { color: #000; }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    /* Кнопка "наверх" */
+    .scroll-top-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 1001;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      color: #333;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+      transition: all 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .scroll-top-btn.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .scroll-top-btn:hover {
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.7);
+      transform: translateY(-2px);
+    }
+
+    .scroll-top-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    @media (max-width: 768px) {
+      body { padding-top: 140px; }
+      .sticky-header .container { flex-direction: column; align-items: center; text-align: center; }
+      .sticky-header .header-left { align-items: center; }
+      .sticky-header .header-contacts { margin-top: 10px; flex-wrap: wrap; justify-content: center; gap: 6px; }
+      .scroll-top-btn { bottom: 20px; right: 20px; }
+    }
+  </style>
+</head>
+<body>
+<div class="glow-bg">
+  <div class="glow-orb"></div>
+  <div class="glow-orb"></div>
+  <div class="glow-orb"></div>
+</div>
+
+<!-- Кнопка "наверх" -->
+<button id="scrollToTopBtn" class="scroll-top-btn" title="Наверх">
+  <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6"/></svg>
+</button>
+
+<div class="sticky-header">
+  <div class="container">
+    <div class="header-left">
+      <div class="logo-wrapper">
+        <img class="logo-letter" src="img/logo.png" alt="R">
+        <span class="logo-text">EALMARKET</span>
+      </div>
+      <div class="subtitle">текст</div>
+    </div>
+    <div class="header-contacts">
+      <a href="" class="contact-item"><span class="contact-icon">📞</span><span class="contact-label">Телефон</span></a>
+      <a href="" class="contact-item"><span class="contact-icon">✉️</span><span class="contact-label">Почта</span></a>
+      <a href="" target="_blank" class="contact-item"><span class="contact-icon">💬</span><span class="contact-label">Telegram</span></a>
+      <a href="" target="_blank" class="contact-item"><span class="contact-icon">🛒</span><span class="contact-label">Ozon</span></a>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="two-photos">
+    <img src="img/6852256706.jpg" alt="Шланги в ассортименте">
+    <img src="img/6852256715.jpg" alt="Промышленные рукава">
+  </div>
+
+  <section class="carousel-section anim-scroll">
+    <h2 class="carousel-title">НАША ПРОДУКЦИЯ</h2>
+    <div class="carousel">
+      <button class="carousel-btn prev" onclick="moveSlide(-1)"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="carousel-track" id="carouselTrack">
+        <div class="carousel-slide"><img src="img/_mTO6cEtrNpqy6k9D1M8YefoV8h-iox1jaQvT75FODkuoDuibIcM5Vs4pGxWtNgyRbViFHByiXd1QqZgzg7AwcZ6.jpg" alt="Гибкий шланг"></div>
+        <div class="carousel-slide"><img src="img/I2BuYT6l0gphukAGsmhpGU1uZwFteMHR-pNNj9z1qLcxGGR5hmGRlRlbJ-dKos7cl-ASNL9yD5NeB-ZgybEyjqEz.jpg" alt="Армированный шланг"></div>
+        <div class="carousel-slide"><img src="img/mqGp4lFnArp72wMhw1F6mf1VYRDZqi1CBTzHJhtFPMwxYfH1dcvAUUXBg-kNzJ_tXXtLWkl2EJxFLUCTtP0UTgIW.jpg" alt="Топливный шланг"></div>
+        <div class="carousel-slide"><img src="img/xBwQ8gXBgXiMadJg4FaRmH-978smL3fELxmSd-9iNUqCBul_6Mxmbw-v7Yk4A4doY_Ko0jwF3V_cT39Djwr9lEcd.jpg" alt="ПВХ шланг"></div>
+      </div>
+      <button class="carousel-btn next" onclick="moveSlide(1)"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+    </div>
+    <div class="carousel-indicators" id="indicators"></div>
+  </section>
+
+  <section class="about anim-scroll">
+    <h2>О КОМПАНИИ</h2>
+    <p><strong>Realmarket</strong> - Занимаемся продажей шлангов. У нас большой ассортимент продукции для любых задач. Работаем только по городам Российской Федерации.</p>
+  </section>
+
+  <section class="price-list anim-scroll">
+    <h2>ПРАЙС-ЛИСТ</h2>
+    <table>
+      <thead><tr><th>ЦЕНА ЗА ОДНУ БУХТУ (ОТ 1 шт.)</th><th>ЦЕНА ЗА ОДНУ БУХТУ (ОТ 10 шт.)</th><th>ЦЕНА ЗА ОДНУ БУХТУ (ОТ 30 шт.)</th></tr></thead>
+      <tbody>
+      <tr><td>1</td><td>1</td><td>1</td></tr>
+      <tr><td>2</td><td>2</td><td>2</td></tr>
+      <tr><td>3</td><td>3</td><td>3</td></tr>
+      <tr><td>4</td><td>4</td><td>4</td></tr>
+      <tr><td>5</td><td>5</td><td>5</td></tr>
+      <tr><td>6</td><td>6</td><td>6</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="contacts anim-scroll">
+    <h2>КОНТАКТЫ</h2>
+    <p><strong>Телефон:</strong> <a href="1" style="color:#000; text-decoration:underline;">+7 (495) 123-45-67</a></p>
+    <p><strong>Email:</strong> <a href="1" style="color:#000; text-decoration:underline;">info@realmarket.ru</a></p>
+    <p><strong>Ozon:</strong> <a href="1" target="_blank" style="color:#000; text-decoration:underline;">Перейти в магазин</a></p>
+    <p><strong>Telegram:</strong> <a href="1" target="_blank" style="color:#000; text-decoration:underline;">Написать нам</a></p>
+  </section>
+
+  <footer>© 2026 Realmarket. Все права защищены.</footer>
+</div>
+
+<script>
+  // Карусель
+  const track = document.getElementById('carouselTrack');
+  const slides = Array.from(track.children);
+  const indicatorsContainer = document.getElementById('indicators');
+  let currentIndex = 0;
+
+  slides.forEach((_, idx) => {
+    const dot = document.createElement('span');
+    dot.classList.add('dot');
+    if (idx === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => goToSlide(idx));
+    indicatorsContainer.appendChild(dot);
+  });
+
+  const dots = document.querySelectorAll('.dot');
+
+  function updateIndicators(index) {
+    dots.forEach(dot => dot.classList.remove('active'));
+    dots[index].classList.add('active');
+  }
+
+  function goToSlide(index) {
+    if (index < 0) index = slides.length - 1;
+    if (index >= slides.length) index = 0;
+    currentIndex = index;
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    updateIndicators(currentIndex);
+  }
+
+  function moveSlide(direction) { goToSlide(currentIndex + direction); }
+  setInterval(() => moveSlide(1), 5000);
+
+  // Анимация при скролле
+  const animatedElements = document.querySelectorAll('.anim-scroll');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+      else entry.target.classList.remove('visible');
+    });
+  }, { threshold: 0.2, rootMargin: '0px 0px -40px 0px' });
+  animatedElements.forEach(el => observer.observe(el));
+
+  // Кнопка "наверх"
+  const scrollBtn = document.getElementById('scrollToTopBtn');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      scrollBtn.classList.add('visible');
+    } else {
+      scrollBtn.classList.remove('visible');
+    }
+  });
+
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+</body>
+</html>
+
+<script>
+  // Блокировка правой кнопки мыши
+  document.addEventListener('contextmenu', event => event.preventDefault());
+
+  // Блокировка клавиш F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+  document.addEventListener('keydown', event => {
+    if (event.key === 'F12' ||
+      (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'J')) ||
+      (event.ctrlKey && event.key === 'u')) {
+      event.preventDefault();
+      alert('Просмотр кода отключен!');
+      return false;
+    }
+  });
+</script>
